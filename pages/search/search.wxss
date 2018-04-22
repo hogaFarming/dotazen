@@ -1,0 +1,10 @@
+/* pages/search/search.wxss */
+.search {
+  display: flex;
+  flex-direction: row;
+  padding: 16rpx;
+}
+.search-input {
+  flex: 1;
+  margin-right: 20rpx;
+}

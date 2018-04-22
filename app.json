@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/search/search"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#222f37",
+    "navigationBarTitleText": "DotaZen",
+    "navigationBarTextStyle": "#fff",
+    "backgroundColor": "#ffffff"
+  }
+}

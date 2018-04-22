@@ -1,0 +1,80 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 玩家数据 -->
+  <view class='section section-player-data' wx:if='{{playerData && playerWl}}'>
+    <view class='logout-btn' bindtap='logout'>
+      <text class='fa fa-close'></text>
+    </view>
+    <view class='media' style='margin-bottom: 16rpx;'>
+      <image class='media-image' style='width: 120rpx;height: 120rpx;' src='{{playerData.profile.avatarmedium}}' />
+      <view class='media-content'>
+        <view class='media-title' style='font-size: 48rpx;'>{{playerData.profile.personaname}}</view>
+        <view class='media-secondary' style='font-size: 28rpx;'>MMR: {{playerData.mmr_estimate.estimate}}</view>
+      </view>
+    </view>
+    <view class='player-meta'>
+      <view class='player-meta-item'>
+        <view class='player-meta-value'>
+          <text style='color: #A9CF54'>{{playerWl.win}}</text>
+          <text>-</text>
+          <text style='color: #C23C2A'>{{playerWl.lose}}</text>
+        </view>
+        <view class='player-meta-label'>RECORD</view>
+      </view>
+      <view class='player-meta-item'>
+        <view class='player-meta-value'>{{playerWl.winRate}}</view>
+        <view class='player-meta-label'>WIN RATE</view>
+      </view>
+      <view class='player-meta-item'>
+        <view class='rank-tier-wrap'>
+          <image class='rank-tier-icon' src='https://www.opendota.com/assets/images/dota2/rank_icons/rank_icon_6.png' />
+          <image class='rank-tier-star' src='https://www.opendota.com/assets/images/dota2/rank_icons/rank_star_5.png' />
+          <!-- <text class='rank-tier-number'>100</text> -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='section-loading' wx:else>
+    <text class='section-loading-icon fa fa-spinner fa-spin'></text>
+  </view>
+  <!-- 最近比赛 -->
+  <view class='section-title'>最近比赛</view>
+  <view class='section recent-matches' wx:if='{{recentMatches}}'>
+    <view
+      class='recent-matches-item mlayout-grid'
+      wx:for='{{recentMatches}}'
+      wx:key='{{item.match_id}}'
+    >
+      <view class='mlayout-grid-cell'>
+        <view class='media'>
+          <image class='media-image' src='{{item.hero_img}}' style='width: 125rpx;height: 70rpx;' />
+          <view class='media-content'>
+            <view class='media-title' style='color: #A9CF54;white-space: nowrap;max-width: 100rpx;'>{{item.hero_name}}</view>
+            <view class='media-secondary'>{{item.skill_fmt}}</view>
+          </view>
+        </view>
+        <view>{{item.lobby_type_fmt}}</view>
+        <view style='color: #c4c4c4;font-size: 24rpx;'>{{item.game_mode_fmt}}</view>
+      </view>
+      <view class='mlayout-grid-cell'>
+        <view>{{item.is_radiant ? '天辉' : '夜魇'}}</view>
+        <view>{{item.duration_fmt}}</view>
+        <view style='color: #c4c4c4;font-size: 24rpx;'>比赛时长</view>
+      </view>
+      <view class='mlayout-grid-cell'>
+        <view style='color: {{item.is_winner ? "#A9CF54" : "#C23C2A"}}'>{{item.is_winner ? '胜利' : '失败'}}</view>
+        <view style='color: #c4c4c4;font-size: 24rpx;'>{{item.start_time_fmt}}</view>
+        <view>{{item.kills + '/' + item.deaths + '/' + item.assists}}</view>
+        <view class='kdabar'>
+          <view class='kdabar-kills' style='width: {{item.kills / (item.deaths + item.kills + item.assists) * 100}}%'></view>
+          <view class='kdabar-deaths' style='width: {{item.deaths / (item.deaths + item.kills + item.assists) * 100}}%'></view>
+          <view class='kdabar-assists' style='width: {{item.assists / (item.deaths + item.kills + item.assists) * 100}}%'></view>
+        </view>
+        <view style='color: #c4c4c4;font-size: 24rpx;'>KDA</view>
+      </view>
+    </view>
+  </view>
+  <view class='section-loading' wx:else>
+    <text class='section-loading-icon fa fa-spinner fa-spin'></text>
+  </view>
+</view>

@@ -1,0 +1,48 @@
+<!--pages/search/search.wxml-->
+<view class="container">
+  <view class="section">
+    <view class="search">
+      <input
+        class='search-input'
+        value='{{searchText}}'
+        placeholder='输入昵称搜索'
+        bindinput='bindSearchInput'
+        bindconfirm='bindSearchConfirm'
+        confirm-type='search'
+      />
+      <button class='search-btn' bindtap='bindSearchBtnTap'>
+        <text class='fa fa-search btn-icon'></text>
+        <text>SEARCH</text>
+      </button>
+    </view>
+  </view>
+  <block wx:if='{{loading}}'>
+    <view class='section-loading'>
+      <text class='section-loading-icon fa fa-spinner fa-spin'></text>
+    </view>
+  </block>
+  <block wx:elif='{{resultList && resultList.length > 0}}'>
+    <view class='section-title'>搜索到{{resultList.length}}位玩家</view>
+    <view class='section section-list'>
+      <view
+        class='section-list-item media'
+        wx:for='{{resultList}}'
+        wx:key='{{item.account_id}}'
+        data-id="{{item.account_id}}"
+        data-avatar="{{item.avatarfull}}"
+        bindtap='bindResultItemTap'
+      >
+        <image class='media-image' src='{{item.avatarfull}}'></image>
+        <view class='media-content'>
+          <view class='media-title'>{{item.personaname}}</view>
+          <view class='media-secondary'>上次比赛时间：{{item.last_match_time_print}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class='section section-list-empty'>
+      <text>暂无数据</text>
+    </view>
+  </block>
+</view>
