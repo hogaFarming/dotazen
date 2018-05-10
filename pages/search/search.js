@@ -24,7 +24,7 @@ Page({
   bindResultItemTap(e) {
     let { id, avatar } = e.currentTarget.dataset
     app.setAccountInfo({
-      account_id: 127712512 || id,
+      account_id: id,
       full_avatar: avatar
     })
     wx.navigateTo({
